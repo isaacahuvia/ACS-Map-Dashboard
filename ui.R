@@ -16,10 +16,14 @@ library( scales )
 library( shiny )
 library( viridisLite )
 library( viridis )
+library( shinycssloaders )
+library( shinyjs )
+library( shinydashboard )
 
 
 ####  UI  ####
 ui <- fluidPage(theme = "style.css",
+                
                 fluidRow(
                   
                   column(width = 3,
@@ -38,9 +42,7 @@ ui <- fluidPage(theme = "style.css",
                                    conditionalPanel(
                                      
                                      condition = "input.selectTableSlim == 'Other'",
-                                     selectizeInput( inputId = "selectTable"
-                                                     , label = "Other tables (press backspace to enable searching):"
-                                                     , choices = tableOptions )
+                                     uiOutput( outputId = "otherTableOptions" )
                                      
                                    ),
                                    
@@ -72,7 +74,9 @@ ui <- fluidPage(theme = "style.css",
                                               
                                               column(width = 6,
                                                      
-                                                     plotOutput("map"),
+                                                     withSpinner(plotOutput("map"), 
+                                                                 color = "#8b0021",
+                                                                 type = 6),
                                                      downloadButton( outputId = "dwnld.map"
                                                                      , label = "Save Map" )
                                                      
@@ -96,8 +100,11 @@ ui <- fluidPage(theme = "style.css",
                                                                
                                                      ), 
                                                      
-                                                     a("README", target = "_blank", href = "https://github.com/Poverty-Lab/ACS-Map-Dashboard#acs-map-dashboard"), br(),
-                                                     a("Aggregation details", target = "_blank", href = "Tract-to-Neighborhood_aggregation.pdf"),
+                                                     a("Tutorial", target ="_blank", href = "https://www.youtube.com/watch?v=hSad5pmTYWI"), br(),
+                                                     a("Readme", target = "_blank", href = "https://github.com/Poverty-Lab/ACS-Map-Dashboard#acs-map-dashboard"), br(),
+                                                     a("Aggregation details", target = "_blank", href = "Tract-to-Neighborhood_aggregation.pdf"), br(),
+                                                     a("Report a bug", href = "mailto:ahuvia@uchicago.edu"),
+                                                     p("v 0.9.2"),
                                                      img(src = "pl_logo_150x.png", align = "right")
                                               )
                                      ),
@@ -143,8 +150,11 @@ ui <- fluidPage(theme = "style.css",
                                                                
                                                      ), 
                                                      
-                                                     a("README", target = "_blank", href = "https://github.com/Poverty-Lab/ACS-Map-Dashboard#acs-map-dashboard"), br(),
-                                                     a("Aggregation details", target = "_blank", href = "Tract-to-Neighborhood_aggregation.pdf"),
+                                                     a("Tutorial", target ="_blank", href = "https://www.youtube.com/watch?v=hSad5pmTYWI"), br(),
+                                                     a("Readme", target = "_blank", href = "https://github.com/Poverty-Lab/ACS-Map-Dashboard#acs-map-dashboard"), br(),
+                                                     a("Aggregation details", target = "_blank", href = "Tract-to-Neighborhood_aggregation.pdf"), br(),
+                                                     a("Report a bug", href = "mailto:ahuvia@uchicago.edu"),
+                                                     p("v 0.9.2"),
                                                      img(src = "pl_logo_150x.png", align = "right")
                                               )
                                               
@@ -171,8 +181,11 @@ ui <- fluidPage(theme = "style.css",
 
                                                      ), 
                                                      
-                                                     a("README", target = "_blank", href = "https://github.com/Poverty-Lab/ACS-Map-Dashboard#acs-map-dashboard"), br(),
-                                                     a("Aggregation details", target = "_blank", href = "Tract-to-Neighborhood_aggregation.pdf"),
+                                                     a("Tutorial", target ="_blank", href = "https://www.youtube.com/watch?v=hSad5pmTYWI"), br(),
+                                                     a("Readme", target = "_blank", href = "https://github.com/Poverty-Lab/ACS-Map-Dashboard#acs-map-dashboard"), br(),
+                                                     a("Aggregation details", target = "_blank", href = "Tract-to-Neighborhood_aggregation.pdf"), br(),
+                                                     a("Report a bug", href = "mailto:ahuvia@uchicago.edu"),
+                                                     p("v 0.9.2"),
                                                      img(src = "pl_logo_150x.png", align = "right")
                                                      
                                               )
@@ -182,9 +195,8 @@ ui <- fluidPage(theme = "style.css",
                          )
                          
                   )
-                  
-                )
                 
+                )
 ) # end of UI
 
 

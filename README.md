@@ -4,20 +4,23 @@ The [ACS Map Dashboard](https://povertylab.shinyapps.io/ACS-Map-Dashboard/) prod
 
 The map, bar plot, and tables produced are all exportable, allowing users to save graphics and data with the click of a button.
 
+**For a tutorial, see https://www.youtube.com/watch?v=hSad5pmTYWI**
 
 ## Run App
 
-Run the app yourself using the following lines of code in [R](https://www.r-project.org/) or [RStudio](https://www.rstudio.com/products/rstudio/) console:
+Run the app in your browser by visiting https://povertylab.shinyapps.io/ACS-Map-Dashboard/. 
+
+Run the app locally in [R](https://www.r-project.org/) or [RStudio](https://www.rstudio.com/products/rstudio/) by using the following lines of code:
 
 ```R
 # install necessary packages
-install.packages( pkgs = c("acs", "bitops", "DT" 
+install.packages(pkgs = c("acs", "bitops", "DT" 
                            , "dplyr", "ggplot2", "mapproj" 
                            , "RCurl", "scales", "shiny"
-                           , "viridisLite", "viridis" ) )
+                           , "viridisLite", "viridis", "zoo"))
                            
 # load the shiny packages
-library( shiny )
+library(shiny)
 
 # Run shiny app from your R/RStudio Console
 shiny::runUrl( url = "https://github.com/Poverty-Lab/ACS-Map-Dashboard/archive/master.zip" )
@@ -120,6 +123,7 @@ Below is a visual representation of how the `global.R`, `ui.R`, and `server.R` s
 |  Calculate by count/proportion/mean|x|x|x|
 |  Calculate by individual/household|x|x|x|
 |  Specify total/percent/per 100k|x|x|x|
+|  Specify denominator for above calculation|x|x|x|
 |**Map**| | | |
 |  Custom title|x|x|x|
 |  Geography labels| | |x|
